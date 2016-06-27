@@ -10,10 +10,10 @@ RSpec.describe Idea, type: :model do
   context "check default of quality" do
     it "should be swill" do
       idea_one = create(:idea)
-      idea_two = create(:idea, quality: 1)
+      idea_two = create(:idea,:genius_idea)
 
       expect(idea_one.quality).to eq("swill")
-      expect(idea_two.quality).to eq("plausible")
+      expect(idea_two.quality).to eq("genius")
       expect(idea_one.quality).not_to eq(idea_two.quality)
     end
   end

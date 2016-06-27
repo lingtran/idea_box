@@ -1,8 +1,30 @@
 require 'rails_helper'
 
 RSpec.describe "User can view ideas", type: :feature do
-  scenario "user can view all existing ideas" do
-    idea_one, idea_two, idea_three = create_list(:ideas, 3)
-    
+  xscenario "user can view all existing ideas" do
+    swill_idea = create(:idea)
+    genius_idea = create(:idea, :genius_idea)
+
+    visit root_path
+
+    within("ideas-index-headers") do
+      expect(page).to have_content("Title")
+      expect(page).to have_content("Body")
+      expect(page).to have_content("Quality")
+    end
+
+    within("ideas-index") do
+      expect(page).to have_content(swill_idea.title)
+      expect(page).to have_content(swill_idea.body)
+      expect(page).to have_content(swill_idea.quality)
+      expect(page).to have_content(genius_idea.title)
+      expect(page).to have_content(genius_idea.body)
+      expect(page).to have_content(genius_idea.quality)
+    end
+
+
+#     the application's root, the user should:
+#
+# See a list of all existing ideas, including the title, body, and quality for each idea.
   end
 end
