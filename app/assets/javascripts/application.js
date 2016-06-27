@@ -40,5 +40,14 @@ $(document).ready(function(){
     });
   }
 
+  function formatBody(bodyText){
+    var = bodyText;
+
+    function nearestWord(bodyText){
+      if (body)
+    }
+    ;
+    return bodyText.substr(0, nearestWord())
+  }
 
 })
