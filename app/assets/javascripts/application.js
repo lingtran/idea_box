@@ -13,3 +13,48 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+$(document).ready(function(){
+
+  $.ajax({
+    type: 'GET',
+    url: '/api/v1/ideas.json',
+    dataType: 'json',
+    success: renderIdeas,
+    error: function( req, status, err ) {
+      console.log( 'something went wrong', status, err );
+    }
+
+  });
+
+
+  function renderIdeas(ideas){
+    console.table(ideas);
+    var ideasSortedByDate = ideas.sort(function(a, b){
+      var dateA = new Date(a.created_at).getTime();
+      var dateB = new Date(b.created_at).getTime();
+      return dateA > dateB ? -1 : dateA < dateB ? 1 : 0
+    });
+
+    $(ideasSortedByDate).each(function(index, object){
+      $('.ideas-table').append(
+        "<tr class='ideas-list'>" +
+        "<td class='idea-title' data-idea-id='" + object.id + "'>" + object.title + "</td>" +
+        "<td class='ideas-body' data-idea-id='" + object.id + "'>" + formatBody(object.body) + "</td>" +
+        "<td class='ideas-quality' data-idea-id='" + object.id + "'>" + object.quality +
+        "</td>" +
+        "</tr>"
+      );
+    });
+  }
+
+  function formatBody(bodyText){
+    if (bodyText.length > 100) {
+      var lastWhiteSpace = bodyText.lastIndexOf(" ")
+      return bodyText.substr(0, lastWhiteSpace);
+    }
+    else {
+      return bodyText;
+    }
+  }
+})
