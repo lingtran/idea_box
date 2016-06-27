@@ -35,8 +35,6 @@ $(document).ready(function(){
       var dateB = new Date(b.created_at).getTime();
       return dateA > dateB ? -1 : dateA < dateB ? 1 : 0
     });
-debugger;
-
 
     $(ideasSortedByDate).each(function(index, object){
       $('.ideas-table').append(
@@ -59,6 +57,4 @@ debugger;
       return bodyText;
     }
   }
-
-
 })

@@ -7,13 +7,13 @@ RSpec.describe "User can view ideas", type: :feature do
 
     visit root_path
 
-    within("ideas-index-headers") do
+    within(".ideas-index-headers") do
       expect(page).to have_content("Title")
       expect(page).to have_content("Body")
       expect(page).to have_content("Quality")
     end
 
-    within("ideas-index") do
+    within(".ideas-index") do
       expect(page).to have_content(swill_idea.title)
       expect(page).to have_content(swill_idea.body)
       expect(page).to have_content(swill_idea.quality)
@@ -21,10 +21,5 @@ RSpec.describe "User can view ideas", type: :feature do
       expect(page).to have_content(genius_idea.body)
       expect(page).to have_content(genius_idea.quality)
     end
-
-
-#     the application's root, the user should:
-#
-# See a list of all existing ideas, including the title, body, and quality for each idea.
   end
 end
