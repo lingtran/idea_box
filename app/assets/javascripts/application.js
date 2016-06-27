@@ -30,7 +30,15 @@ $(document).ready(function(){
 
   function renderIdeas(ideas){
     console.table(ideas);
-    $(ideas).each(function(index, object){
+    var ideasSortedByDate = ideas.sort(function(a, b){
+      var dateA = new Date(a.created_at).getTime();
+      var dateB = new Date(b.created_at).getTime();
+      return dateA > dateB ? -1 : dateA < dateB ? 1 : 0
+    });
+debugger;
+
+
+    $(ideasSortedByDate).each(function(index, object){
       $('.ideas-table').append(
         "<tr class='ideas-list'>" +
         "<td class='idea-title' data-idea-id='" + object.id + "'>" + object.title + "</td>" +
