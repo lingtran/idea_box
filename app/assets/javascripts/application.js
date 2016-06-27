@@ -24,15 +24,17 @@ $(document).ready(function(){
     error: function( req, status, err ) {
       console.log( 'something went wrong', status, err );
     }
+
   });
 
-  function renderIdeas(response){
-    console.table(response);
-    $(response).each(function(index, object){
+
+  function renderIdeas(ideas){
+    console.table(ideas);
+    $(ideas).each(function(index, object){
       $('.ideas-table').append(
         "<tr class='ideas-list'>" +
         "<td class='idea-title' data-idea-id='" + object.id + "'>" + object.title + "</td>" +
-        "<td class='ideas-body' data-idea-id='" + object.id + "'>" + object.body + "</td>" +
+        "<td class='ideas-body' data-idea-id='" + object.id + "'>" + formatBody(object.body) + "</td>" +
         "<td class='ideas-quality' data-idea-id='" + object.id + "'>" + object.quality +
         "</td>" +
         "</tr>"
@@ -41,13 +43,14 @@ $(document).ready(function(){
   }
 
   function formatBody(bodyText){
-    var = bodyText;
-
-    function nearestWord(bodyText){
-      if (body)
+    if (bodyText.length > 100) {
+      var lastWhiteSpace = bodyText.lastIndexOf(" ")
+      return bodyText.substr(0, lastWhiteSpace);
     }
-    ;
-    return bodyText.substr(0, nearestWord())
+    else {
+      return bodyText;
+    }
   }
+
 
 })
