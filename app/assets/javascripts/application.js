@@ -39,9 +39,12 @@ $(document).ready(function(){
       $('.ideas-table').append(
         "<tr class='ideas-list'>" +
         "<td class='idea-title' data-idea-id='" + object.id + "'>" + object.title + "</td>" +
-        "<td class='ideas-body' data-idea-id='" + object.id + "'>" + formatBody(object.body) + "</td>" +
-        "<td class='ideas-quality' data-idea-id='" + object.id + "' " + "data-idea-quality='" + object.quality + "'>" + object.quality + "<input type='button' name='thumbs-up' value='thumbs up' id='thumbs-up' data-idea-id='>" + object.id + "'>" + "<input type='button' name='thumbs-down' value='thumbs down' id='thumbs-down' data-idea-id='" + object.id + "'>" +
-        "</td>" +
+        "<td class='idea-body' data-idea-id='" + object.id + "'>" + formatBody(object.body) + "</td>" +
+        "<td class='idea-quality' data-idea-id='" + object.id + "' " + "data-idea-quality='" + object.quality + "'>" + object.quality + "</td>" +
+        "<td class='idea-quality-up' data-idea-id='" + object.id + "' " + "data-idea-quality='" + object.quality + "'>" +
+        "<input type='button' name='thumbs-up' value='thumbs up' id='thumbs-up' data-idea-id='" + object.id + "'></td>" +
+        "<td class='idea-quality-down' data-idea-id='" + object.id + "' " + "data-idea-quality='" + object.quality + "'>" +
+        "<input type='button' name='thumbs-down' value='thumbs down' id='thumbs-down' data-idea-id='" + object.id + "'></td>" +
         "<td><a href='#' class='delete-idea' data-idea-id='" + object.id + "'>Delete</a></td>" +
         "</tr>"
       );
@@ -83,20 +86,19 @@ $(document).ready(function(){
     $('.ideas-table tr:first').after(
       "<tr class='ideas-list'>" +
       "<td class='idea-title' data-idea-id='" + newIdea.id + "'>" + newIdea.title + "</td>" +
-      "<td class='ideas-body' data-idea-id='" + newIdea.id + "'>" + formatBody(newIdea.body) + "</td>" +
-      "<td class='ideas-quality' data-idea-id='" + newIdea.id + "' " + "data-idea-quality='" + newIdea.quality + "'>" + newIdea.quality + "<input type='button' name='thumbs-up' value='thumbs up' id='thumbs-up' data-idea-id='>" + newIdea.id + "'>" + "<input type='button' name='thumbs-down' value='thumbs down' id='thumbs-down' data-idea-id='" + newIdea.id + "'>" +
-      "</td>" +
+      "<td class='idea-body' data-idea-id='" + newIdea.id + "'>" + formatBody(newIdea.body) + "</td>" +
+      "<td class='idea-quality' data-idea-id='" + newIdea.id + "' " + "data-idea-quality='" + newIdea.quality + "'>" + newIdea.quality + "</td>" +
+      "<td class='idea-quality-up' data-idea-id='" + newIdea.id + "' " + "data-idea-quality='" + newIdea.quality + "'>" +
+      "<input type='button' name='thumbs-up' value='thumbs up' id='thumbs-up' data-idea-id='" + newIdea.id + "'></td>" +
+      "<td class='idea-quality-down' data-idea-id='" + newIdea.id + "' " + "data-idea-quality='" + newIdea.quality + "'>" +
+      "<input type='button' name='thumbs-down' value='thumbs down' id='thumbs-down' data-idea-id='" + newIdea.id + "'></td>" +
       "<td><a href='#' class='delete-idea' data-idea-id='" + newIdea.id + "'>Delete</a></td>" +
       "</tr>"
     );
   }
 
-  // when click 'thumbs up' button, change status to next level up
-  // patch request will require quality as a part of its data as well as id of idea
+// thumbs up
   $('body').on('click', 'input[name=thumbs-up]', function(){
-    //issue: when after entered in inspecting console, line 96 is active; but without doing so, no reaction upon clicking button
-    // resolution: utilize 'body' selector...interesting...why did that work?
-
     var currentQuality = $(this).parent().data('idea-quality');
     var ideaId = $(this).parent().data('idea-id');
     var patchData = { id: ideaId, quality: incrementQualityBasedOn(currentQuality) };
@@ -125,17 +127,44 @@ $(document).ready(function(){
 
   });
 
-  // need assistance with updating the quality data attr and quality text being viewed; server side has no issues with updating;
+// thumbs down
+  $('body').on('click', 'input[name=thumbs-down]', function(){
+    var currentQuality = $(this).parent().data('idea-quality');
+    var ideaId = $(this).parent().data('idea-id');
+    var patchData = { id: ideaId, quality: decrementQualityBasedOn(currentQuality) };
+
+    function decrementQualityBasedOn(currentState) {
+      if (currentState === "genius") {
+        return "plausible";
+      } else if (currentState === "plausible") {
+        return "swill";
+      } else {
+        return currentState;
+      }
+    }
+
+    $.ajax({
+      method: 'PATCH',
+      url: '/api/v1/ideas/' + ideaId + ".json",
+      data: patchData,
+      dataType: "JSON",
+      success: updateQuality,
+      failure: function(req, status, err) {
+        console.log('something went wrong with the update', status, err);
+      }
+    });
+
+  });
+
   function updateQuality(updateResponse){
     var newQuality = updateResponse.quality;
-    var currentQuality = $('.ideas-quality [data-idea-id=' + updateResponse.id + ']').parent().data('idea-quality');
-    // var changeQualityDataTag = $('.ideas-quality [data-idea-id=' + updateResponse.id + ']').change(function(){
-    //   $(this).parent()
-    //     .data('idea-quality')
-    //       .val(newQuality);
-    // });
+    var changeQualityText =  $('[data-idea-id=' + updateResponse.id + ']').parent().children('.idea-quality').text(newQuality);
 
-    var changeQualityText =  $('.ideas-quality [data-idea-id=' + updateResponse.id + ']').parent().text(newQuality);
+    var currentQuality = $('this, [data-idea-id=' + updateResponse.id + ']').parent().data('idea-quality', newQuality);
+
+    // writing to DOM for debugging purposes;
+    var currentQuality = $('this, [data-idea-id=' + updateResponse.id + ']').parent().attr('data-idea-quality', newQuality);
+
   }
 
   $('.ideas-index').on('click', '.delete-idea', function(e){

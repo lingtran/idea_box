@@ -32,7 +32,7 @@ RSpec.configure do |config|
 
   config.include FactoryGirl::Syntax::Methods
 
-    config.before(:suite) do
+    config.before(:suite, :js => true) do
       DatabaseCleaner.strategy = :truncation
       DatabaseCleaner.clean_with(:truncation)
     end
@@ -44,7 +44,7 @@ RSpec.configure do |config|
     end
 
   config.include JsonHelpers, type: :request
-  
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
