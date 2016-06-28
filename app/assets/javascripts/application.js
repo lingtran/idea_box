@@ -99,9 +99,6 @@ $(document).ready(function(){
       url: "/api/v1/ideas/" + ideaId + ".json",
       dataType: "JSON",
       success: function(){
-
-        // having trouble capturing response data
-        // 'this' does not provide idea id that can be used to enable removal
         idea.remove();
       },
       error: function(req, status, err){
