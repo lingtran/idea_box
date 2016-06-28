@@ -11,6 +11,7 @@ RSpec.describe "User can view ideas", type: :feature do
       expect(page).to have_content("Title")
       expect(page).to have_content("Body")
       expect(page).to have_content("Quality")
+      expect(page).to have_content("Delete")
     end
 
     within(".ideas-index") do
