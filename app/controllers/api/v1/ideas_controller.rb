@@ -16,7 +16,9 @@ class Api::V1::IdeasController < Api::ApiController
 
 
   def destroy
-    respond_with status: 204 if Idea.delete(params[:id].to_i)
+    idea = Idea.find(params[:id].to_i)
+    idea.destroy
+    respond_with idea
   end
 
   private

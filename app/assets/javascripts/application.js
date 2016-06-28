@@ -138,24 +138,20 @@ $(document).ready(function(){
     var changeQualityText =  $('.ideas-quality [data-idea-id=' + updateResponse.id + ']').parent().text(newQuality);
   }
 
-
-
-// need assistance with delete
-  // $('.ideas-index').on('click', '.delete-idea', function(){
-  //   var ideaId = $(this).data('idea-id');
-  //   $.ajax({
-  //     method: 'DELETE',
-  //     url: "/api/v1/ideas/" + ideaId + ".json",
-  //     dataType: "JSON",
-  //     success: function(ideaId){
-  //       // having trouble capturing response data
-  //       // 'this' does not provide idea id that can be used to enable removal
-  //       $(this).data('idea-id').remove();
-  //     },
-  //     error: function(req, status, err){
-  //       console.log('something went wrong when deleting idea', status, err);
-  //     }
-  //   });
-  // });
+  $('.ideas-index').on('click', '.delete-idea', function(e){
+    var idea = $(e.currentTarget).closest('tr');
+    var ideaId = $(this).data('idea-id');
+    $.ajax({
+      method: 'DELETE',
+      url: "/api/v1/ideas/" + ideaId + ".json",
+      dataType: "JSON",
+      success: function(){
+        idea.remove();
+      },
+      error: function(req, status, err){
+        console.log('something went wrong when deleting idea', status, err);
+      }
+    });
+  });
 
 });
