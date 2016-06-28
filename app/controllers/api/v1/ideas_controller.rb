@@ -10,8 +10,9 @@ class Api::V1::IdeasController < Api::ApiController
   end
 
   def destroy
-    Idea.find(params[:id].to_i).destroy
-    respond_with head: :no_content
+    idea = Idea.find(params[:id].to_i)
+    idea.destroy
+    respond_with idea
   end
 
   private
