@@ -27,7 +27,6 @@ $(document).ready(function(){
 
   });
 
-
   function renderIdeas(ideas){
     console.table(ideas);
     var ideasSortedByDate = ideas.sort(function(a, b){
@@ -56,5 +55,38 @@ $(document).ready(function(){
     else {
       return bodyText;
     }
-  }
+  };
+
+  $('#create-idea').on('click', function(){
+    var newIdeaTitle = $('#new-idea-title').val();
+    var newIdeaBody = $('#new-idea-body').val();
+    var postData = { title: newIdeaTitle, body: newIdeaBody  };
+
+    $.ajax({
+      type: 'POST',
+      url: '/api/v1/ideas.json',
+      dataType: 'json',
+      data: postData,
+      success: prependNewIdea,
+      error: function (req, status, err ){
+        console.log('something went wrong when posting', status, err);
+      }
+    });
+
+    $('#new-idea-title').val("Title");
+    $('#new-idea-body').val("Body");
+
+  });
+
+
+  function prependNewIdea(newIdea){
+    $('.ideas-table tr:first').after(
+      "<tr class='ideas-list'>" +
+      "<td class='idea-title' data-idea-id='" + newIdea.id + "'>" + newIdea.title + "</td>" +
+      "<td class='ideas-body' data-idea-id='" + newIdea.id + "'>" + formatBody(newIdea.body) + "</td>" +
+      "<td class='ideas-quality' data-idea-id='" + newIdea.id + "'>" + newIdea.quality +
+      "</td>" +
+      "</tr>"
+    );
+  };
 })
