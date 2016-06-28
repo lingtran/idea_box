@@ -40,7 +40,7 @@ $(document).ready(function(){
         "<tr class='ideas-list'>" +
         "<td class='idea-title' data-idea-id='" + object.id + "'>" + object.title + "</td>" +
         "<td class='ideas-body' data-idea-id='" + object.id + "'>" + formatBody(object.body) + "</td>" +
-        "<td class='ideas-quality' data-idea-id='" + object.id + "'>" + object.quality + "<input type='button' name='thumbs-up' value='thumps up' id='thumbs-up'>" + "<input type='button' name='thumbs-down' value='thumps down' id='thumbs-down'>" +
+        "<td class='ideas-quality' data-idea-id='" + object.id + "'>" + object.quality + "<input type='button' name='thumbs-up' value='thumps up' id='thumbs-up' data-idea-id='>" + object.id + "'>" + "<input type='button' name='thumbs-down' value='thumps down' id='thumbs-down' data-idea-id='>" + object.id + "'>" + 
         "</td>" +
         "<td><a href='#' class='delete-idea' data-idea-id='" + object.id + "'>Delete</a></td>" +
         "</tr>"
@@ -84,7 +84,7 @@ $(document).ready(function(){
       "<tr class='ideas-list'>" +
       "<td class='idea-title' data-idea-id='" + newIdea.id + "'>" + newIdea.title + "</td>" +
       "<td class='ideas-body' data-idea-id='" + newIdea.id + "'>" + formatBody(newIdea.body) + "</td>" +
-      "<td class='ideas-quality' data-idea-id='" + newIdea.id + "'>" + newIdea.quality + "<input type='button' name='thumbs-up' value='thumps up' id='thumbs-up'>" + "<input type='button' name='thumbs-down' value='thumps down' id='thumbs-down'>" + 
+      "<td class='ideas-quality' data-idea-id='" + newIdea.id + "'>" + newIdea.quality + "<input type='button' name='thumbs-up' value='thumps up' id='thumbs-up' data-idea-id='>" + newIdea.id + "'>" + "<input type='button' name='thumbs-down' value='thumps down' id='thumbs-down' data-idea-id='>" + newIdea.id + "'>" +
       "</td>" +
       "<td><a href='#' class='delete-idea' data-idea-id='" + newIdea.id + "'>Delete</a></td>" +
       "</tr>"
