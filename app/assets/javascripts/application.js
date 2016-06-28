@@ -92,13 +92,14 @@ $(document).ready(function(){
   };
 
   $('.ideas-index').on('click', '.delete-idea', function(){
-    var ideaId = $(this).parent().data('idea-id');
+    var ideaId = $(this).data('idea-id');
     $.ajax({
       method: 'DELETE',
-      url: "/api/v1/ideas/" + ideaId,
+      url: "/api/v1/ideas/" + ideaId + ".json",
       dataType: "JSON",
-      success: function(){
-
+      success: function(ideaId){
+        debugger;
+        $(this).data('idea-id').remove();
       },
       error: function(req, status, err){
         console.log('something went wrong when deleting idea', status, err);
