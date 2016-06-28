@@ -38,6 +38,7 @@ gem 'rails_12factor', group: :production
 
 group :test do
   gem 'simplecov', :require => false
+  gem 'selenium-webdriver'
 end
 
 group :development, :test do
