@@ -135,9 +135,7 @@ $(document).ready(function(){
     //       .val(newQuality);
     // });
 
-    var changeQualityText =  $('.ideas-quality [data-idea-id=' + updateResponse.id + ']').parent().change(function(){
-      $(this).text(currentQuality);
-    })
+    var changeQualityText =  $('.ideas-quality [data-idea-id=' + updateResponse.id + ']').parent().text(newQuality);
   }
 
 
