@@ -38,8 +38,8 @@ $(document).ready(function(){
     $(ideasSortedByDate).each(function(index, object){
       $('.ideas-table').append(
         "<tr class='ideas-list'>" +
-        "<td class='idea-title' data-idea-id='" + object.id + "'>" + object.title + "</td>" +
-        "<td class='idea-body' data-idea-id='" + object.id + "'>" + formatBody(object.body) + "</td>" +
+        "<td class='idea-title' id='idea-title' data-idea-id='" + object.id + "'>" + object.title + "</td>" +
+        "<td class='idea-body' id='idea-body' data-idea-id='" + object.id + "'>" + formatBody(object.body) + "</td>" +
         "<td class='idea-quality' data-idea-id='" + object.id + "' " + "data-idea-quality='" + object.quality + "'>" + object.quality + "</td>" +
         "<td class='idea-quality-up' data-idea-id='" + object.id + "' " + "data-idea-quality='" + object.quality + "'>" +
         "<input type='button' name='thumbs-up' value='thumbs up' id='thumbs-up' data-idea-id='" + object.id + "'></td>" +
@@ -85,8 +85,8 @@ $(document).ready(function(){
   function prependNewIdea(newIdea){
     $('.ideas-table tr:first').after(
       "<tr class='ideas-list'>" +
-      "<td class='idea-title' data-idea-id='" + newIdea.id + "'>" + newIdea.title + "</td>" +
-      "<td class='idea-body' data-idea-id='" + newIdea.id + "'>" + formatBody(newIdea.body) + "</td>" +
+      "<td class='idea-title' id='idea-title' data-idea-id='" + newIdea.id + "'>" + newIdea.title + "</td>" +
+      "<td class='idea-body' id ='idea-body' data-idea-id='" + newIdea.id + "'>" + formatBody(newIdea.body) + "</td>" +
       "<td class='idea-quality' data-idea-id='" + newIdea.id + "' " + "data-idea-quality='" + newIdea.quality + "'>" + newIdea.quality + "</td>" +
       "<td class='idea-quality-up' data-idea-id='" + newIdea.id + "' " + "data-idea-quality='" + newIdea.quality + "'>" +
       "<input type='button' name='thumbs-up' value='thumbs up' id='thumbs-up' data-idea-id='" + newIdea.id + "'></td>" +
@@ -109,7 +109,6 @@ $(document).ready(function(){
       } else if (currentState === "plausible") {
         return "genius";
       } else {
-        alert("Whoa, this is already quality. Is a genius idea not already the epitome of a quality idea?!");
         return currentState;
       }
     }
@@ -182,5 +181,78 @@ $(document).ready(function(){
       }
     });
   });
+
+// idea title
+
+  $('.ideas-index').delegate('.idea-title', 'click', function(e){
+    $(this).attr('contentEditable', 'true');
+  });
+
+  $('.ideas-index').delegate('.idea-title', 'keydown', function(e){
+    if(e.keyCode === 13) {
+      var updateTitle = $(e.currentTarget).text();
+      var ideaId = $(e.currentTarget).data('idea-id');
+      var patchData = { title: updateTitle };
+      e.preventDefault();
+
+      $(this).attr('contentEditable', 'false')
+
+      updateIdea(ideaId, patchData)
+    }
+  });
+
+  $('.ideas-index').delegate('.idea-title', 'blur', function(e){
+    var updateTitle = $(e.currentTarget).text();
+    var ideaId = $(e.currentTarget).data('idea-id');
+    var patchData = { title: updateTitle };
+    e.preventDefault();
+
+    $(this).attr('contentEditable', 'false')
+
+    updateIdea(ideaId, patchData)
+  });
+
+  // update idea body
+  $('.ideas-index').delegate('.idea-body', 'click', function(e){
+    $(this).attr('contentEditable', 'true');
+  });
+
+  $('.ideas-index').delegate('.idea-body', 'keydown', function(e){
+    if(e.keyCode === 13) {
+      var updateBody = $(e.currentTarget).text();
+      var ideaId = $(e.currentTarget).data('idea-id');
+      var patchData = { body: updateBody };
+      e.preventDefault();
+
+      $(this).attr('contentEditable', 'false')
+
+      updateIdea(ideaId, patchData)
+    }
+  });
+
+  $('.ideas-index').delegate('.idea-body', 'blur', function(e){
+    var updateBody = $(e.currentTarget).text();
+    var ideaId = $(e.currentTarget).data('idea-id');
+    var patchData = { body: updateBody };
+
+    $(this).attr('contentEditable', 'false')
+
+    updateIdea(ideaId, patchData)
+  });
+
+
+  function updateIdea(ideaId, patchData){
+    $.ajax({
+      method: "PATCH",
+      url: "/api/v1/ideas/" + ideaId + ".json",
+      dataType: "JSON",
+      data: patchData,
+      success: function(){
+      },
+      error: function(req, status, err){
+        console.log("something went wrong when updating title", status, err);
+      }
+    });
+  }
 
 });
