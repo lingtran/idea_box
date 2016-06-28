@@ -40,7 +40,7 @@ $(document).ready(function(){
         "<tr class='ideas-list'>" +
         "<td class='idea-title' data-idea-id='" + object.id + "'>" + object.title + "</td>" +
         "<td class='ideas-body' data-idea-id='" + object.id + "'>" + formatBody(object.body) + "</td>" +
-        "<td class='ideas-quality' data-idea-id='" + object.id + "'>" + object.quality +
+        "<td class='ideas-quality' data-idea-id='" + object.id + "'>" + object.quality + "<input type='button' name='thumbs-up' value='thumps up' id='thumbs-up'>" + "<input type='button' name='thumbs-down' value='thumps down' id='thumbs-down'>" +
         "</td>" +
         "<td><a href='#' class='delete-idea' data-idea-id='" + object.id + "'>Delete</a></td>" +
         "</tr>"
@@ -84,28 +84,32 @@ $(document).ready(function(){
       "<tr class='ideas-list'>" +
       "<td class='idea-title' data-idea-id='" + newIdea.id + "'>" + newIdea.title + "</td>" +
       "<td class='ideas-body' data-idea-id='" + newIdea.id + "'>" + formatBody(newIdea.body) + "</td>" +
-      "<td class='ideas-quality' data-idea-id='" + newIdea.id + "'>" + newIdea.quality +
+      "<td class='ideas-quality' data-idea-id='" + newIdea.id + "'>" + newIdea.quality + "<input type='button' name='thumbs-up' value='thumps up' id='thumbs-up'>" + "<input type='button' name='thumbs-down' value='thumps down' id='thumbs-down'>" + 
       "</td>" +
       "<td><a href='#' class='delete-idea' data-idea-id='" + newIdea.id + "'>Delete</a></td>" +
       "</tr>"
     );
   };
 
-  $('.ideas-index').on('click', '.delete-idea', function(){
-    var ideaId = $(this).data('idea-id');
-    $.ajax({
-      method: 'DELETE',
-      url: "/api/v1/ideas/" + ideaId + ".json",
-      dataType: "JSON",
-      success: function(ideaId){
-        // having trouble capturing response data
-        // 'this' does not provide idea id that can be used to enable removal
-        $(this).data('idea-id').remove();
-      },
-      error: function(req, status, err){
-        console.log('something went wrong when deleting idea', status, err);
-      }
-    });
-  });
+
+
+
+// need assistance with delete
+  // $('.ideas-index').on('click', '.delete-idea', function(){
+  //   var ideaId = $(this).data('idea-id');
+  //   $.ajax({
+  //     method: 'DELETE',
+  //     url: "/api/v1/ideas/" + ideaId + ".json",
+  //     dataType: "JSON",
+  //     success: function(ideaId){
+  //       // having trouble capturing response data
+  //       // 'this' does not provide idea id that can be used to enable removal
+  //       $(this).data('idea-id').remove();
+  //     },
+  //     error: function(req, status, err){
+  //       console.log('something went wrong when deleting idea', status, err);
+  //     }
+  //   });
+  // });
 
 })

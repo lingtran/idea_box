@@ -64,4 +64,21 @@ RSpec.describe "Api::V1::IdeasController", type: :request do
     end
   end
 
+  describe "UPDATE idea" do
+    before(:each) do
+      @ideas = create_list(:idea, 2)
+
+      patch "/api/v1/ideas/#{@ideas.first.id}"
+    end
+
+    it "provides a response for deleted idea" do
+      expect(response).to have_http_status(200)
+      expect(response).to be_success
+    end
+
+    it "removes the idea" do
+      expect(Idea.all).not_to include(@ideas.first)
+    end
+  end
+
 end
