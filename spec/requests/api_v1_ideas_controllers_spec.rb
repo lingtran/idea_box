@@ -67,17 +67,23 @@ RSpec.describe "Api::V1::IdeasController", type: :request do
   describe "UPDATE idea" do
     before(:each) do
       @ideas = create_list(:idea, 2)
+      @previous_quality = @ideas.first.quality
+      @new_quality = "plausible"
 
-      patch "/api/v1/ideas/#{@ideas.first.id}"
+      patch "/api/v1/ideas/#{@ideas.first.id}?quality=#{@new_quality}"
     end
 
-    it "provides a response for deleted idea" do
+    it "provides a response for updated idea" do
       expect(response).to have_http_status(200)
       expect(response).to be_success
     end
 
-    it "removes the idea" do
-      expect(Idea.all).not_to include(@ideas.first)
+    it "updates the quality of the idea" do
+      expect(response_body[:id]).to eq(@ideas.first.id)
+      expect(response_body[:title]).to eq(@ideas.first.title)
+      expect(response_body[:quality]).to eq(@new_quality)
+      expect(response_body[:quality]).to eq(Idea.first.quality)
+      expect(@previous_quality).not_to eq(Idea.first.quality)
     end
   end
 

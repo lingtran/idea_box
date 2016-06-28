@@ -40,7 +40,7 @@ $(document).ready(function(){
         "<tr class='ideas-list'>" +
         "<td class='idea-title' data-idea-id='" + object.id + "'>" + object.title + "</td>" +
         "<td class='ideas-body' data-idea-id='" + object.id + "'>" + formatBody(object.body) + "</td>" +
-        "<td class='ideas-quality' data-idea-id='" + object.id + "'>" + object.quality + "<input type='button' name='thumbs-up' value='thumps up' id='thumbs-up' data-idea-id='>" + object.id + "'>" + "<input type='button' name='thumbs-down' value='thumps down' id='thumbs-down' data-idea-id='>" + object.id + "'>" + 
+        "<td class='ideas-quality' data-idea-id='" + object.id + "'>" + object.quality + "<input type='button' name='thumbs-up' value='thumps up' id='thumbs-up' data-idea-id='>" + object.id + "'>" + "<input type='button' name='thumbs-down' value='thumps down' id='thumbs-down' data-idea-id='>" + object.id + "'>" +
         "</td>" +
         "<td><a href='#' class='delete-idea' data-idea-id='" + object.id + "'>Delete</a></td>" +
         "</tr>"
@@ -91,7 +91,8 @@ $(document).ready(function(){
     );
   };
 
-
+// when click 'thumbs up' button, change status to next level up
+// patch request will require quality as a part of its data as well as id of idea
 
 
 // need assistance with delete

@@ -1,5 +1,5 @@
 class Api::V1::IdeasController < Api::ApiController
-  before_filter :idea_params, on: [:create]
+  before_filter :idea_params, on: [:create, :update]
 
   def index
     respond_with Idea.all
@@ -9,6 +9,12 @@ class Api::V1::IdeasController < Api::ApiController
     respond_with Idea.create(idea_params), location: nil
   end
 
+  def update
+    idea = Idea.update(params[:id], quality: idea_params[:quality])
+    respond_with idea, json: idea
+  end
+
+
   def destroy
     respond_with status: 204 if Idea.delete(params[:id].to_i)
   end
@@ -16,6 +22,6 @@ class Api::V1::IdeasController < Api::ApiController
   private
 
     def idea_params
-      params.permit(:title, :body)
+      params.permit(:title, :body, :quality)
     end
 end
