@@ -1,11 +1,11 @@
 function updateQuality(updateResponse){
   var newQuality = updateResponse.quality;
-  var changeQualityText =  $('[data-idea-id=' + updateResponse.id + ']').parent().children('.idea-quality').text(newQuality);
 
-  var currentQuality = $('this, [data-idea-id=' + updateResponse.id + ']').parent().data('idea-quality', newQuality);
+  $('[data-idea-id=' + updateResponse.id + ']').parent().children('.idea-quality').text(newQuality);
+  $('this, [data-idea-id=' + updateResponse.id + ']').parent().data('idea-quality', newQuality);
 
   // writing to DOM for debugging purposes;
-  var currentQuality = $('this, [data-idea-id=' + updateResponse.id + ']').parent().attr('data-idea-quality', newQuality);
+  $('this, [data-idea-id=' + updateResponse.id + ']').parent().attr('data-idea-quality', newQuality);
 }
 
 function incrementQualityBasedOn(currentState){

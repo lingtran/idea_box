@@ -3,3 +3,11 @@ function setContentEditable(element){
     $(this).attr('contentEditable', 'true');
   });
 }
+
+var patchData = function(element, updateContent){
+  if (element === '.idea-title'){
+    return { title: updateContent };
+  } else {
+    return { body: updateContent };
+  }
+}

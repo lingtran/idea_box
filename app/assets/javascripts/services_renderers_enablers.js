@@ -25,7 +25,6 @@ function renderNewIdea() {
   });
 }
 
-
 function voteIdeaQuality(inputName){
   $('body').on('click', inputName, function(){
     var currentQuality = $(this).parent().data('idea-quality');
@@ -43,28 +42,28 @@ function voteIdeaQuality(inputName){
 
 function enableEditIdeaOnKey(element, errorMessage){
   $('.ideas-index').delegate(element, 'keydown', function(e){
+
     if(e.keyCode === 13) {
-      var updateTitle = $(e.currentTarget).text();
       var ideaId = $(e.currentTarget).data('idea-id');
-      var patchData = { title: updateTitle };
+      var updateContent = $(e.currentTarget).text();
+
       e.preventDefault();
 
       $(this).attr('contentEditable', 'false')
 
-      updateIdeaCall(ideaId, patchData, errorMessage)
+      updateIdeaCall(ideaId, patchData(element, updateContent), errorMessage)
     }
   });
 }
 
 function enableEditIdeaOnBlur(element, errorMessage){
   $('.ideas-index').delegate(element, 'blur', function(e){
-    var updateTitle = $(e.currentTarget).text();
+    var updateContent = $(e.currentTarget).text();
     var ideaId = $(e.currentTarget).data('idea-id');
-    var patchData = { title: updateTitle };
 
     $(this).attr('contentEditable', 'false')
 
-    updateIdeaCall(ideaId, patchData, errorMessage);
+    updateIdeaCall(ideaId, patchData(element, updateContent), errorMessage);
   });
 }
 

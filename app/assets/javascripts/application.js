@@ -21,7 +21,7 @@ $(document).ready(function(){
 
   voteIdeaQuality('input[name=thumbs-up]');
   voteIdeaQuality('input[name=thumbs-down]');
-  
+
   enableDeleteIdea();
 
   setContentEditable('.idea-title');
@@ -30,7 +30,7 @@ $(document).ready(function(){
   enableEditIdeaOnKey('.idea-title', 'something went wrong when updating the title');
   enableEditIdeaOnKey('.idea-body', 'something went wrong when updating the body');
 
-  enableEditIdeaOnBlur('.idea-title',  'something went wrong when updating the title');
-  enableEditIdeaOnBlur('.idea-body',  'something went wrong when updating the body');
+  enableEditIdeaOnBlur('.idea-title', 'something went wrong when updating the title');
+  enableEditIdeaOnBlur('.idea-body', 'something went wrong when updating the body');
 
 });
