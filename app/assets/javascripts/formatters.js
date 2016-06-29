@@ -1,8 +1,10 @@
 function orderIdeas(ideas) {
   console.table(ideas);
+
   var ideasSortedByDate = ideas.sort(function(a, b){
     var dateA = new Date(a.created_at).getTime();
     var dateB = new Date(b.created_at).getTime();
+
     return dateA > dateB ? -1 : dateA < dateB ? 1 : 0;
   });
 

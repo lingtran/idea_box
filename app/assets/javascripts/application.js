@@ -18,94 +18,10 @@ $(document).ready(function(){
 
   renderIdeas();
   renderNewIdea();
+  voteIdeaQuality('input[name=thumbs-up]');
+  voteIdeaQuality('input[name=thumbs-down]');
+  enableDeleteIdea();
 
-
-// thumbs up
-  $('body').on('click', 'input[name=thumbs-up]', function(){
-    var currentQuality = $(this).parent().data('idea-quality');
-    var ideaId = $(this).parent().data('idea-id');
-    var patchData = { id: ideaId, quality: incrementQualityBasedOn(currentQuality) };
-
-    function incrementQualityBasedOn(currentState){
-      if (currentState === "swill") {
-        return "plausible";
-      } else if (currentState === "plausible") {
-        return "genius";
-      } else {
-        return currentState;
-      }
-    }
-
-    $.ajax({
-      method: 'PATCH',
-      url: '/api/v1/ideas/' + ideaId + ".json",
-      data: patchData,
-      dataType: "JSON",
-      success: updateQuality,
-      failure: function(req, status, err) {
-        console.log('something went wrong with the update', status, err);
-      }
-    });
-
-  });
-
-// thumbs down
-  $('body').on('click', 'input[name=thumbs-down]', function(){
-    var currentQuality = $(this).parent().data('idea-quality');
-    var ideaId = $(this).parent().data('idea-id');
-    var patchData = { id: ideaId, quality: decrementQualityBasedOn(currentQuality) };
-
-    function decrementQualityBasedOn(currentState) {
-      if (currentState === "genius") {
-        return "plausible";
-      } else if (currentState === "plausible") {
-        return "swill";
-      } else {
-        return currentState;
-      }
-    }
-
-    $.ajax({
-      method: 'PATCH',
-      url: '/api/v1/ideas/' + ideaId + ".json",
-      data: patchData,
-      dataType: "JSON",
-      success: updateQuality,
-      failure: function(req, status, err) {
-        console.log('something went wrong with the update', status, err);
-      }
-    });
-
-  });
-
-  function updateQuality(updateResponse){
-    var newQuality = updateResponse.quality;
-    var changeQualityText =  $('[data-idea-id=' + updateResponse.id + ']').parent().children('.idea-quality').text(newQuality);
-
-    var currentQuality = $('this, [data-idea-id=' + updateResponse.id + ']').parent().data('idea-quality', newQuality);
-
-    // writing to DOM for debugging purposes;
-    var currentQuality = $('this, [data-idea-id=' + updateResponse.id + ']').parent().attr('data-idea-quality', newQuality);
-
-  }
-
-  $('.ideas-index').on('click', '.delete-idea', function(e){
-    var idea = $(e.currentTarget).closest('tr');
-    var ideaId = $(this).data('idea-id');
-    $.ajax({
-      method: 'DELETE',
-      url: "/api/v1/ideas/" + ideaId + ".json",
-      dataType: "JSON",
-      success: function(){
-        idea.remove();
-      },
-      error: function(req, status, err){
-        console.log('something went wrong when deleting idea', status, err);
-      }
-    });
-  });
-
-// idea title
 
   $('.ideas-index').delegate('.idea-title', 'click', function(e){
     $(this).attr('contentEditable', 'true');
@@ -120,7 +36,7 @@ $(document).ready(function(){
 
       $(this).attr('contentEditable', 'false')
 
-      updateIdea(ideaId, patchData)
+      updateIdeaCall(ideaId, patchData, 'something went wrong when updating the title')
     }
   });
 
@@ -132,7 +48,7 @@ $(document).ready(function(){
 
     $(this).attr('contentEditable', 'false')
 
-    updateIdea(ideaId, patchData)
+    updateIdeaCall(ideaId, patchData, 'something went wrong when updating the title')
   });
 
   // update idea body
@@ -149,7 +65,7 @@ $(document).ready(function(){
 
       $(this).attr('contentEditable', 'false')
 
-      updateIdea(ideaId, patchData)
+      updateIdeaCall(ideaId, patchData, 'something went wrong when updating the body')
     }
   });
 
@@ -160,22 +76,8 @@ $(document).ready(function(){
 
     $(this).attr('contentEditable', 'false')
 
-    updateIdea(ideaId, patchData)
+    updateIdeaCall(ideaId, patchData, 'something went wrong when updating the body')
   });
 
-
-  function updateIdea(ideaId, patchData){
-    $.ajax({
-      method: "PATCH",
-      url: "/api/v1/ideas/" + ideaId + ".json",
-      dataType: "JSON",
-      data: patchData,
-      success: function(){
-      },
-      error: function(req, status, err){
-        console.log("something went wrong when updating title", status, err);
-      }
-    });
-  }
 
 });
