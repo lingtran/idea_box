@@ -30,13 +30,7 @@ function voteIdeaQuality(inputName){
     var currentQuality = $(this).parent().data('idea-quality');
     var ideaId = $(this).parent().data('idea-id');
 
-    if (inputName === 'input[name=thumbs-up]') {
-      var patchData = { id: ideaId, quality: incrementQualityBasedOn(currentQuality) };
-    } else {
-      var patchData = { id: ideaId, quality: decrementQualityBasedOn(currentQuality) };
-    }
-
-    updateQualityCall(ideaId, patchData, 'something went wrong with the update');
+    updateQualityCall(ideaId, patchQualityData(inputName, ideaId, currentQuality), 'something went wrong with the update');
   });
 }
 

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "User can view ideas", type: :feature do
-  scenario "user can view all existing ideas", :js => true do
+  xscenario "user can view all existing ideas", :js => true do
     swill_idea = create(:idea)
     genius_idea = create(:idea, :genius_idea)
 

@@ -11,11 +11,11 @@ function createIdeaCall(postData){
   });
 }
 
-function updateQualityCall (ideaId, patchData, errorMessage){
+function updateQualityCall (ideaId, patchQualityData, errorMessage){
   $.ajax({
     method: 'PATCH',
     url: '/api/v1/ideas/' + ideaId + ".json",
-    data: patchData,
+    data: patchQualityData,
     dataType: "JSON",
     success: updateQuality,
     failure: function(req, status, err) {
