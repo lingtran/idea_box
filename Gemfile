@@ -35,6 +35,8 @@ gem 'responders', '~> 2.0'
 gem 'active_model_serializers', github: "rails-api/active_model_serializers"
 gem 'rails_12factor', group: :production
 
+gem 'sprockets', '>= 3.0.0'
+gem 'sprockets-es6'
 
 group :test do
   gem 'simplecov', :require => false
