@@ -16,86 +16,9 @@
 
 $(document).ready(function(){
 
-  $.ajax({
-    type: 'GET',
-    url: '/api/v1/ideas.json',
-    dataType: 'JSON',
-    success: renderIdeas,
-    error: function( req, status, err ) {
-      console.log( 'something went wrong in retrieving ideas index', status, err );
-    }
+  renderIdeas();
+  renderNewIdea();
 
-  });
-
-  function renderIdeas(ideas){
-    console.table(ideas);
-    var ideasSortedByDate = ideas.sort(function(a, b){
-      var dateA = new Date(a.created_at).getTime();
-      var dateB = new Date(b.created_at).getTime();
-      return dateA > dateB ? -1 : dateA < dateB ? 1 : 0;
-    });
-
-    $(ideasSortedByDate).each(function(index, object){
-      $('.ideas-table').append(
-        "<tr class='ideas-list'>" +
-        "<td class='idea-title' id='idea-title' data-idea-id='" + object.id + "'>" + object.title + "</td>" +
-        "<td class='idea-body' id='idea-body' data-idea-id='" + object.id + "'>" + formatBody(object.body) + "</td>" +
-        "<td class='idea-quality' data-idea-id='" + object.id + "' " + "data-idea-quality='" + object.quality + "'>" + object.quality + "</td>" +
-        "<td class='idea-quality-up' data-idea-id='" + object.id + "' " + "data-idea-quality='" + object.quality + "'>" +
-        "<input type='button' name='thumbs-up' value='thumbs up' id='thumbs-up' data-idea-id='" + object.id + "'></td>" +
-        "<td class='idea-quality-down' data-idea-id='" + object.id + "' " + "data-idea-quality='" + object.quality + "'>" +
-        "<input type='button' name='thumbs-down' value='thumbs down' id='thumbs-down' data-idea-id='" + object.id + "'></td>" +
-        "<td><a href='#' class='delete-idea' data-idea-id='" + object.id + "'>Delete</a></td>" +
-        "</tr>"
-      );
-    });
-  }
-
-  function formatBody(bodyText){
-    if (bodyText.length > 100) {
-      var lastWhiteSpace = bodyText.lastIndexOf(" ");
-      return bodyText.substr(0, lastWhiteSpace);
-    }
-    else {
-      return bodyText;
-    }
-  }
-
-  $('#create-idea').on('click', function(){
-    var newIdeaTitle = $('#new-idea-title').val();
-    var newIdeaBody = $('#new-idea-body').val();
-    var postData = { title: newIdeaTitle, body: newIdeaBody  };
-
-    $.ajax({
-      type: 'POST',
-      url: '/api/v1/ideas.json',
-      dataType: 'JSON',
-      data: postData,
-      success: prependNewIdea,
-      error: function (req, status, err ){
-        console.log('something went wrong when posting', status, err);
-      }
-    });
-
-    $('#new-idea-title').val("Title");
-    $('#new-idea-body').val("Body");
-
-  });
-
-  function prependNewIdea(newIdea){
-    $('.ideas-table tr:first').after(
-      "<tr class='ideas-list'>" +
-      "<td class='idea-title' id='idea-title' data-idea-id='" + newIdea.id + "'>" + newIdea.title + "</td>" +
-      "<td class='idea-body' id ='idea-body' data-idea-id='" + newIdea.id + "'>" + formatBody(newIdea.body) + "</td>" +
-      "<td class='idea-quality' data-idea-id='" + newIdea.id + "' " + "data-idea-quality='" + newIdea.quality + "'>" + newIdea.quality + "</td>" +
-      "<td class='idea-quality-up' data-idea-id='" + newIdea.id + "' " + "data-idea-quality='" + newIdea.quality + "'>" +
-      "<input type='button' name='thumbs-up' value='thumbs up' id='thumbs-up' data-idea-id='" + newIdea.id + "'></td>" +
-      "<td class='idea-quality-down' data-idea-id='" + newIdea.id + "' " + "data-idea-quality='" + newIdea.quality + "'>" +
-      "<input type='button' name='thumbs-down' value='thumbs down' id='thumbs-down' data-idea-id='" + newIdea.id + "'></td>" +
-      "<td><a href='#' class='delete-idea' data-idea-id='" + newIdea.id + "'>Delete</a></td>" +
-      "</tr>"
-    );
-  }
 
 // thumbs up
   $('body').on('click', 'input[name=thumbs-up]', function(){
@@ -213,7 +136,7 @@ $(document).ready(function(){
   });
 
   // update idea body
-  $('.ideas-index').delegate('.idea-body', 'click', function(e){
+  $('.ideas-index').delegate('.idea-body', 'click', function(){
     $(this).attr('contentEditable', 'true');
   });
 
