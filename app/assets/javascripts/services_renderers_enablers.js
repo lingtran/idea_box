@@ -25,18 +25,6 @@ function renderNewIdea() {
   });
 }
 
-function createIdeaCall(postData){
-  $.ajax({
-    type: 'POST',
-    url: '/api/v1/ideas.json',
-    dataType: 'JSON',
-    data: postData,
-    success: prependNewIdea,
-    error: function (req, status, err ){
-      console.log('something went wrong when posting', status, err);
-    }
-  });
-}
 
 function voteIdeaQuality(inputName){
   $('body').on('click', inputName, function(){
@@ -53,31 +41,30 @@ function voteIdeaQuality(inputName){
   });
 }
 
-function updateQualityCall (ideaId, patchData, errorMessage){
-  $.ajax({
-    method: 'PATCH',
-    url: '/api/v1/ideas/' + ideaId + ".json",
-    data: patchData,
-    dataType: "JSON",
-    success: updateQuality,
-    failure: function(req, status, err) {
-      console.log(errorMessage, status, err);
+function enableEditIdeaOnKey(element, errorMessage){
+  $('.ideas-index').delegate(element, 'keydown', function(e){
+    if(e.keyCode === 13) {
+      var updateTitle = $(e.currentTarget).text();
+      var ideaId = $(e.currentTarget).data('idea-id');
+      var patchData = { title: updateTitle };
+      e.preventDefault();
+
+      $(this).attr('contentEditable', 'false')
+
+      updateIdeaCall(ideaId, patchData, errorMessage)
     }
   });
 }
 
-function updateIdeaCall(ideaId, patchData, errorMessage){
-  $.ajax({
-    method: "PATCH",
-    url: "/api/v1/ideas/" + ideaId + ".json",
-    dataType: "JSON",
-    data: patchData,
-    success: function(){
-      console.log("success!")
-    },
-    error: function(req, status, err){
-      console.log(errorMessage, status, err);
-    }
+function enableEditIdeaOnBlur(element, errorMessage){
+  $('.ideas-index').delegate(element, 'blur', function(e){
+    var updateTitle = $(e.currentTarget).text();
+    var ideaId = $(e.currentTarget).data('idea-id');
+    var patchData = { title: updateTitle };
+
+    $(this).attr('contentEditable', 'false')
+
+    updateIdeaCall(ideaId, patchData, errorMessage);
   });
 }
 
@@ -87,19 +74,5 @@ function enableDeleteIdea(){
     var ideaId = $(this).data('idea-id');
 
     deleteIdeaCall(idea, ideaId);
-  });
-}
-
-function deleteIdeaCall(idea, ideaId){
-  $.ajax({
-    method: 'DELETE',
-    url: "/api/v1/ideas/" + ideaId + ".json",
-    dataType: "JSON",
-    success: function(){
-      idea.remove();
-    },
-    error: function(req, status, err){
-      console.log('something went wrong when deleting idea', status, err);
-    }
   });
 }
