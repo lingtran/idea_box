@@ -10,7 +10,8 @@ class Api::V1::IdeasController < Api::ApiController
   end
 
   def update
-    idea = Idea.update(params[:id], quality: idea_params[:quality])
+    idea = Idea.find(params[:id].to_i)
+    idea.update(idea_params)
     respond_with idea, json: idea
   end
 
