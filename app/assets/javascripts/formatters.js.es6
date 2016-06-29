@@ -15,9 +15,9 @@ function orderIdeas(ideas) {
       <td class=idea-body id=idea-body data-idea-id=${object.id}> ${formatBody(object.body)} </td>
       <td class=idea-quality data-idea-id=${object.id} data-idea-quality= ${object.quality}>${object.quality}</td>
       <td class=idea-quality-up data-idea-id=${object.id} data-idea-quality= ${object.quality }>
-      <input type=button name=thumbs-up value=thumbs up id=thumbs-up data-idea-id=${object.id} ></td>
+      <input type=button name=thumbs-up value="thumbs up" id=thumbs-up data-idea-id=${object.id} ></td>
       <td class=idea-quality-down data-idea-id=${object.id } data-idea-quality=${object.quality}>
-      <input type=button name=thumbs-down value=thumbs down id=thumbs-down data-idea-id=${object.id}></td>
+      <input type=button name=thumbs-down value="thumbs down" id=thumbs-down data-idea-id=${object.id}></td>
       <td><a href=# class=delete-idea data-idea-id=${object.id}>Delete</a></td>
       </tr>`
     );
@@ -41,9 +41,9 @@ function prependNewIdea(newIdea){
     <td class=idea-body id=idea-body data-idea-id=${newIdea.id} > ${formatBody(newIdea.body)} </td>
     <td class=idea-quality data-idea-id=${newIdea.id} data-idea-quality= ${newIdea.quality} > ${newIdea.quality} </td>
     <td class=idea-quality-up data-idea-id=${newIdea.id} data-idea-quality= ${newIdea.quality }>
-    <input type=button name=thumbs-up value=thumbs up id=thumbs-up data-idea-id=${newIdea.id} ></td>
+    <input type=button name=thumbs-up value="thumbs up" id=thumbs-up data-idea-id=${newIdea.id} ></td>
     <td class=idea-quality-down data-idea-id=${newIdea.id } data-idea-quality= ${newIdea.quality} >
-    <input type=button name=thumbs-down value=thumbs down id=thumbs-down data-idea-id=${newIdea.id}></td>
+    <input type=button name=thumbs-down value="thumbs down" id=thumbs-down data-idea-id=${newIdea.id}></td>
     <td><a href=# class=delete-idea data-idea-id=${newIdea.id}>Delete</a></td>
     </tr>`
   );
