@@ -10,7 +10,7 @@ function orderIdeas(ideas) {
 
   $(ideasSortedByDate).each(function(index, object){
     $('.ideas-table').append(
-      "<tr class='ideas-list'>" +
+      "<tr class='ideas-list' data-title='" + object.title + "' data-body='" + object.body + "'>" +
       "<td class='idea-title' id='idea-title' data-idea-id='" + object.id + "'>" + object.title + "</td>" +
       "<td class='idea-body' id='idea-body' data-idea-id='" + object.id + "'>" + formatBody(object.body) + "</td>" +
       "<td class='idea-quality' data-idea-id='" + object.id + "' " + "data-idea-quality='" + object.quality + "'>" + object.quality + "</td>" +
@@ -36,7 +36,7 @@ function formatBody(bodyText){
 
 function prependNewIdea(newIdea){
   $('.ideas-table tr:first').after(
-    "<tr class='ideas-list'>" +
+    "<tr class='ideas-list' data-title='" + newIdea.title + "' data-body='" + newIdea.body + "'>" +
     "<td class='idea-title' id='idea-title' data-idea-id='" + newIdea.id + "'>" + newIdea.title + "</td>" +
     "<td class='idea-body' id ='idea-body' data-idea-id='" + newIdea.id + "'>" + formatBody(newIdea.body) + "</td>" +
     "<td class='idea-quality' data-idea-id='" + newIdea.id + "' " + "data-idea-quality='" + newIdea.quality + "'>" + newIdea.quality + "</td>" +

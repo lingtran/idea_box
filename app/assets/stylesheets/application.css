@@ -42,10 +42,19 @@
   border: 2%;
 }
 
-#search-idea {
+#search-field {
   width: 80%;
   height: 20px;
   align-self: center;
   margin: 2%;
   border: 2%;
+}
+
+.search-idea {
+  width: 80%;
+  height: 20px;
+  align-self: center;
+  margin: 2%;
+  border: 2px solid black;
+  
 }

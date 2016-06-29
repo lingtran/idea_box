@@ -40,10 +40,15 @@ function enableEditIdeaOnKey(element, errorMessage){
     if(e.keyCode === 13) {
       var ideaId = $(e.currentTarget).data('idea-id');
       var updateContent = $(e.currentTarget).text();
-
       e.preventDefault();
 
       $(this).attr('contentEditable', 'false')
+
+      if(element === ".idea-title"){
+        $(this).parent().data().title = updateContent;
+      } else {
+        $(this).parent().data().body = updateContent;
+      }
 
       updateIdeaCall(ideaId, patchData(element, updateContent), errorMessage)
     }
@@ -56,6 +61,12 @@ function enableEditIdeaOnBlur(element, errorMessage){
     var ideaId = $(e.currentTarget).data('idea-id');
 
     $(this).attr('contentEditable', 'false')
+
+    if(element === ".idea-title"){
+      $(this).parent().data().title = updateContent;
+    } else {
+      $(this).parent().data().body = updateContent;
+    }
 
     updateIdeaCall(ideaId, patchData(element, updateContent), errorMessage);
   });
