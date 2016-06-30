@@ -7,17 +7,18 @@ function enableFilteredSearch(){
     var searchText = $(e.currentTarget).text().trim();
 
     filterIdeas(ideas, searchText);
+  });  
+}
+
+
+function filterIdeas(ideas, searchText) {
+  ideas.filter(function(index, idea){
+    var existingText = $(idea).data();
+
+    if( existingText.title.includes(searchText) || existingText.body.includes(searchText)) {
+      $(this).show();
+    } else{
+      $(this).hide();
+    }
   });
-
-  function filterIdeas(ideas, searchText) {
-    ideas.filter(function(index, idea){
-      var existingText = $(idea).data();
-
-      if( existingText.title.includes(searchText) || existingText.body.includes(searchText)) {
-        $(this).show();
-      } else{
-        $(this).hide();
-      }
-    });
-  }
 }
