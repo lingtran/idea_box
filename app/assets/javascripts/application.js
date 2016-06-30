@@ -24,8 +24,9 @@ $(document).ready(function(){
 
   enableDeleteIdea();
 
-  setContentEditable('.idea-title');
-  setContentEditable('.idea-body');
+  setContentEditable('.ideas-index', '.idea-title');
+  setContentEditable('.ideas-index', '.idea-body');
+  setContentEditable('.search-field', '.search-idea');
 
   enableEditIdeaOnKey('.idea-title','something went wrong when updating the title');
   enableEditIdeaOnKey('.idea-body', 'something went wrong when updating the body');
@@ -33,28 +34,6 @@ $(document).ready(function(){
   enableEditIdeaOnBlur('.idea-title', 'something went wrong when updating the title');
   enableEditIdeaOnBlur('.idea-body', 'something went wrong when updating the body');
 
-  $('.search-field').delegate('.search-idea', 'click', function(){
-    $(this).attr('contentEditable', 'true');
-  })
-
-  $('.search-field').delegate('.search-idea', 'keyup', function(e){
-    var searchText = $(e.currentTarget).text().trim();
-    e.preventDefault();
-
-    var ideas = $('.ideas-list');
-
-    var filterIdeas = $('.ideas-list').each(function(index, idea){
-
-      ideas.filter(function(index, idea){
-        var existingText = $(idea).data();
-
-        if( existingText.title.includes(searchText) || existingText.body.includes(searchText)) {
-          $(this).show();
-        } else{
-          $(this).hide();
-        }
-      });
-    })
-  });
+  enableFilteredSearch();
 
 });

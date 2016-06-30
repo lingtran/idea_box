@@ -1,5 +1,5 @@
-function setContentEditable(element){
-  $('.ideas-index').delegate(element, 'click', function(e){
+function setContentEditable(parentElement, childElement){
+  $(parentElement).delegate(childElement, 'click', function(){
     $(this).attr('contentEditable', 'true');
   });
 }
@@ -10,4 +10,4 @@ var patchData = function(element, updateContent){
   } else {
     return { body: updateContent };
   }
-}
+};
