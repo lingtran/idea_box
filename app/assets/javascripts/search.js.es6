@@ -10,30 +10,27 @@ function enableFilteredSearch(){
 
     filterIdeas(ideas, searchText);
 
-    escapeSearchOnBlur(ideas);
-    escapeSearchOnEsc(ideas);
+    escapeSearch(ideas, 'keyup');
+    escapeSearch(ideas, 'blur')
 
   });
 }
 
-function escapeSearchOnBlur (ideas){
-  $('.search-field').delegate('.search-idea', 'blur', function(e){
-    $(this).empty();
-    $('.new-idea').show();
-    ideas.show();
-  })
-}
-
-function escapeSearchOnEsc (ideas){
-  $('.search-field').delegate('.search-idea', 'keyup', function(e){
-    $('.search-field').attr('contentEditable', 'false');
-
-    if(e.keyCode === 27){
+function escapeSearch(ideas, behavior) {
+  $('.search-field').delegate('.search-idea', behavior, function(e){
+    if (behavior === 'keyup'){
+      $('.search-field').attr('contentEditable', 'false');
+      if (e.keyCode === 27){
+        $(this).empty();
+        $('.new-idea').show();
+        ideas.show();
+      }
+    } else {
+      $(this).empty();
       $('.new-idea').show();
       ideas.show();
-      $(this).empty();
     }
-  });
+  })
 }
 
 function filterIdeas(ideas, searchText) {
