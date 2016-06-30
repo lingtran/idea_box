@@ -14,45 +14,91 @@
  *= require_self
  */
 
-.th {
-  word-wrap: break-word;
+ body {
+   background-color: #f5f5f5;
+ }
+
+ /*header*/
+h1 {
+  color: teal;
+  font-family: cursive;
+  font-weight: bolder;
 }
 
+ /*container*/
+ .container {
+   margin: 2%;
+   border: 2%;
+ }
+
+section {
+  float: inherit;
+  align-items: center;
+}
+
+/*table*/
+td {
+  font-family: sans-serif;
+  font-size: small;
+}
+
+tr {
+  outline: 2px #efefef solid;
+}
+
+th {
+  word-wrap: break-word;
+  border-bottom: 2px solid black;
+  font-family: cursive;
+  column-rule-color: transparent;
+  color: teal;
+}
+
+.ideas-index {
+  margin-right: 1%;
+  margin-left: 1%;
+  width: 100%;
+  align-items: center
+}
+
+.ideas-title {
+  width: 15%;
+}
+
+.ideas-body {
+  width: 70%;
+}
+/*create idea*/
+
 #new-idea-title {
-  width: 30%;
+  width: 300px;
+  height: 20px;
+  align: left;
 }
 
 #new-idea-body {
-  width: 30%;
+  width: 300px;
   height: 100px;
 }
 
 .new-idea {
   margin: 2%;
   border: 2%;
+  float: left;
+  overflow: auto;
 }
 
-.ideas-index {
-  margin: 2%;
-  border: 2%;
-}
-
-.container {
-  margin: 2%;
-  border: 2%;
-}
-
+/*search*/
 .search-field {
-  align-self: center;
   margin: 2%;
 }
 
 .search-idea {
-  width: 80%;
   height: 20px;
-  align-self: center;
-  margin: 2%;
-  border: 2px solid green;
+  width:100%;
+  align-self: left;
+  border: 2px solid #efefef;
+  background-color: white;
 }
 
 [contentEditable=true]:not(:focus)::before{
