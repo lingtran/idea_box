@@ -22,7 +22,9 @@ RSpec.describe "User can delete idea", type: :feature do
       page.all('.delete-idea')[0].click
     end
 
+    visit current_path
     wait_for_ajax
+
 
     new_count = page.all('.ideas-list').length
 
