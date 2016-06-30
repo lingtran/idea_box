@@ -41,6 +41,7 @@ gem 'sprockets-es6'
 group :test do
   gem 'simplecov', :require => false
   gem 'selenium-webdriver'
+  gem 'chromedriver-helper'
 end
 
 group :development, :test do
