@@ -11645,7 +11645,8 @@ function orderIdeas(ideas) {
 
 function formatBody(bodyText) {
   if (bodyText.length > 100) {
-    var lastWhiteSpace = bodyText.lastIndexOf(" ");
+    var getChars = bodyText.substr(0, 100);
+    var lastWhiteSpace = getChars.lastIndexOf(" ");
     return bodyText.substr(0, lastWhiteSpace);
   } else {
     return bodyText;

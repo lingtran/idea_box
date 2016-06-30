@@ -25,6 +25,7 @@ function orderIdeas(ideas) {
 }
 
 function formatBody(bodyText){
+  console.log("I'm here!");
   if (bodyText.length > 100) {
     var getChars = bodyText.substr(0, 100);
     var lastWhiteSpace = getChars.lastIndexOf(" ");
