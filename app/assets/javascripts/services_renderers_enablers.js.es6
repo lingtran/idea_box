@@ -19,8 +19,8 @@ function renderNewIdea() {
 
     createIdeaCall(postData);
 
-    $('#new-idea-title').val("Title");
-    $('#new-idea-body').val("Body");
+    $('#new-idea-title').val("");
+    $('#new-idea-body').val("");
 
   });
 }

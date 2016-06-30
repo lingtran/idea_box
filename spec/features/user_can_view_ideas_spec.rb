@@ -1,11 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe "User can view ideas", type: :feature do
-  xscenario "user can view all existing ideas", :js => true do
+  scenario "user can view all existing ideas", :js => true do
     swill_idea = create(:idea)
     genius_idea = create(:idea, :genius_idea)
 
     visit root_path
+    wait_for_ajax
 
     within(".ideas-index-headers") do
       expect(page).to have_content("Title")
