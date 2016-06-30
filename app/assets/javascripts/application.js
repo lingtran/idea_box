@@ -26,7 +26,6 @@ $(document).ready(function(){
 
   setContentEditable('.ideas-index', '.idea-title');
   setContentEditable('.ideas-index', '.idea-body');
-  setContentEditable('.search-field', '.search-idea');
 
   enableEditIdeaOnKey('.idea-title','something went wrong when updating the title');
   enableEditIdeaOnKey('.idea-body', 'something went wrong when updating the body');

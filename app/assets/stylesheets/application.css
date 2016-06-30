@@ -47,15 +47,17 @@
   margin: 2%;
 }
 
-.label{
-  align-self: center;
-  margin: 2%;
-}
-
 .search-idea {
   width: 80%;
   height: 20px;
   align-self: center;
   margin: 2%;
   border: 2px solid green;
+}
+
+[contentEditable=true]:not(:focus)::before{
+  content:attr(title);
+  color: lightblack;
+  font-family: sans-serif;
+  font-size: small;
 }
