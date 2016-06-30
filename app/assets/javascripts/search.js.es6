@@ -4,18 +4,20 @@ function enableFilteredSearch(){
     e.preventDefault();
 
     var ideas = $('.ideas-list');
-    var searchText = $(e.currentTarget).text().trim();
+    var searchText = $(e.currentTarget).text().trim().toLowerCase();
 
     filterIdeas(ideas, searchText);
-  });  
+  });
 }
 
 
 function filterIdeas(ideas, searchText) {
   ideas.filter(function(index, idea){
     var existingText = $(idea).data();
+    var titleText = existingText.title.toLowerCase();
+    var bodyText = existingText.body.toLowerCase();
 
-    if( existingText.title.includes(searchText) || existingText.body.includes(searchText)) {
+    if( titleText.includes(searchText) || bodyText.includes(searchText)) {
       $(this).show();
     } else{
       $(this).hide();
