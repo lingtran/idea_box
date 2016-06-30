@@ -42,12 +42,14 @@
   border: 2%;
 }
 
-#search-field {
-  width: 80%;
-  height: 20px;
+.search-field {
   align-self: center;
   margin: 2%;
-  border: 2%;
+}
+
+.label{
+  align-self: center;
+  margin: 2%;
 }
 
 .search-idea {
@@ -55,6 +57,5 @@
   height: 20px;
   align-self: center;
   margin: 2%;
-  border: 2px solid black;
-  
+  border: 2px solid green;
 }
