@@ -45,6 +45,9 @@ end
 group :development, :test do
   gem 'rspec-rails'
   gem 'pry'
+  gem 'pry-remote'
+  gem 'pry-stack_explorer'
+  gem 'pry-byebug'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'launchy'

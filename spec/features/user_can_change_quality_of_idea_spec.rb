@@ -7,7 +7,7 @@ RSpec.describe "User can change quality of idea", type: :feature do
 
     visit root_path
 
-    within(page.all['.ideas-list'].first) do
+    within(page.all('.ideas-list')[0]) do
       click_button('thumbs down')
 
       expect(page).to have_content("plausible")

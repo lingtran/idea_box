@@ -57,6 +57,7 @@ GEM
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
+    byebug (9.0.5)
     capybara (2.7.1)
       addressable
       mime-types (>= 1.16)
@@ -130,6 +131,15 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    pry-byebug (3.4.0)
+      byebug (~> 9.0)
+      pry (~> 0.10)
+    pry-remote (0.1.8)
+      pry (~> 0.9)
+      slop (~> 3.0)
+    pry-stack_explorer (0.4.9.2)
+      binding_of_caller (>= 0.7)
+      pry (>= 0.9.11)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -258,6 +268,9 @@ DEPENDENCIES
   mocha
   pg (~> 0.15)
   pry
+  pry-byebug
+  pry-remote
+  pry-stack_explorer
   rails (= 4.2.6)
   rails_12factor
   responders (~> 2.0)

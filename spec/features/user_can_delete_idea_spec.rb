@@ -18,13 +18,13 @@ RSpec.describe "User can delete idea", type: :feature do
 
     wait_for_ajax
 
-    within('.ideas-index') do
+    expect{within('.ideas-index') do
       page.all('.delete-idea')[0].click
-    end
+    end}.to change{Idea.count}.by(-1)
 
     visit current_path
-    wait_for_ajax
 
+    wait_for_ajax
 
     new_count = page.all('.ideas-list').length
 
