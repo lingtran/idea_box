@@ -13,3 +13,8 @@
 /tmp
 
 /coverage/*
+
+.bundle
+
+.ruby-gemset
+.ruby-version
