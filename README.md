@@ -1,8 +1,3 @@
-== README
-
-* [Production URL](http://my-ideabox.herokuapp.com/)
-
-
 ## Production Site
 [http://my-ideabox.herokuapp.com/)
 
