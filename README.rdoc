@@ -1,3 +1,0 @@
-== README
-
-* [Production URL](http://my-ideabox.herokuapp.com/)
