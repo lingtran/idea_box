@@ -1,5 +1,5 @@
 ## Production Site
-[http://my-ideabox.herokuapp.com/)
+(http://my-ideabox.herokuapp.com/)
 
 ![http://g.recordit.co/yOEQEhJYTR.gif](http://g.recordit.co/yOEQEhJYTR.gif)
 
