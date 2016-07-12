@@ -6,7 +6,7 @@
 ## Production Site
 [http://my-ideabox.herokuapp.com/)
 
-![http://g.recordit.co/0VYdlrrnOg.gif](http://g.recordit.co/0VYdlrrnOg.gif)
+![http://g.recordit.co/yOEQEhJYTR.gif](http://g.recordit.co/yOEQEhJYTR.gif)
 
 ## Synopsis
 
@@ -18,7 +18,7 @@ Show what the library does as concisely as possible, developers should be able t
 
 ## Motivation
 
-Idea Boz
+Idea Box
 
 A short description of the motivation behind the creation and maintenance of the project. This should explain **why** the project exists.
 
