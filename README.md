@@ -5,40 +5,64 @@
 
 ## Synopsis
 
+Single-page app with full CRUD functionality for capturing ideas. Focus was to provide a fluid and responsive client-side interface.
 
 
-## Code Example
+## Tech Stack
 
-Show what the library does as concisely as possible, developers should be able to figure out **how** your project solves their problem by looking at the code example. Make sure the API you are showing off is obvious, and that your code is short and concise.
+##### Front-end
+> JavaScript | jQuery | AJAX | HTML | CSS
+
+##### Back-end
+> Ruby on Rails | Ruby | PostgreSQL | ActiveRecord
 
 ## Motivation
 
-Idea Box
+This project's learning goals were focused on delving deeper into understanding the difference between "server" and "client" entities. It focused on creating a Rails application to manage data related to ideas, serve initial UI templates, and to manage client-side interactions and communication asynchronously with the server. Obtained more experience doing DOM manipulations and AJAX event handling without using any client-side frameworks. All AJAX functionality was triggered by jQuery.
 
-A short description of the motivation behind the creation and maintenance of the project. This should explain **why** the project exists.
-
-* [Project Spec](link here)
-* [Project Evaluation](link here)
+* [Project Spec](https://github.com/turingschool/curriculum/blob/master/source/projects/revenge_of_idea_box.markdown)
+* [Project Evaluation](https://github.com/lingtran/idea_box/blob/master/idea-box-eval.md)
+  * Exceeded total assigned points with addition of self-directed UX feature enhancement beyond project spec
 
 ## Installation
 
-Provide code examples and explanations of how to get the project.
+##### Clone git repo
+> `git clone https://github.com/lingtran/idea_box.git`
 
-## API Reference
+#### Install Gems
+> `bundle install`
 
-Depending on the size of the project, if it is small and simple enough the reference docs can be added to the README. For medium size to larger projects it is important to at least provide a link to where the API reference docs live.
+##### Loading the database and seed file
+> For initial setup:
+`rake db:setup`
+
+> Alternative setup:
+`rake db:create db:migrate db:seed`
+
+#### Run development environment
+> `rails s`
+
+> Visit url: `http://localhost:3000`
 
 ## Tests
 
-Describe and show how to run the tests with code examples.
+Test Suite: RSpec/Factory Girl/Database Cleaner/Selenium WebDriver/Capybara
 
-## License
+##### Run all tests
+> Fire up server: `rails s`
 
-The MIT License (MIT)
-Copyright (c) 2016 Ling Tran
+> Run test suite: `rspec`
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+## Internal API Reference
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+Endpoint of internal API created to interact with the Google Charts API:
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+> `GET '/api/v1/ideas.json'` - Render all ideas
+
+> `POST '/api/v1/ideas.json?title=:newIdeaTitle&body=:newIdeaBody'` - Create new idea with a title and body
+
+> `PATCH '/api/v1/ideas/:id.json?title=:updateTitle&body=:updateBody'` - Update an idea at specified :id and with title and body parameters
+
+> `PATCH '/api/v1/ideas/:id.json?id=:ideaID&quality=:updateWithQuality'` - Update an idea at specified :id either by incrementing quality ['swill' -> 'swill' -> 'genius'] or by decrementing quality ['genius' -> 'plausible' -> 'swill']
+
+> `DELETE '/api/v1/ideas/:id.json'` - Delete an idea at specified :id
