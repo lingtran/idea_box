@@ -21,8 +21,6 @@
 ### Link to Your Commits in the Github Repository for the Project
 [Your Commits](https://github.com/lingtran/idea_box/commits/master)
 
-### Provide a Screenshot of your Application
-![ling-tran](images/ling-tran.png)
 
 ## Completion
 
@@ -63,11 +61,6 @@ function escapeSearch(ideas, behavior) {
 * https://github.com/lingtran/idea_box/blob/master/app/assets/javascripts/formatters.js.es6#L11-50
   - the ```prepend``` and ```append``` functions are not so DRY
 * Challenge of considering writing a dynamic function that does not rely so much on conditionals
-
-### Attach a screenshot or paste the output from your terminal of the result of your test-suite running.
-![ling-tran-test](images/ling-tran-test.png)
-
-### Provide a link to an example, if you have one, of a test that covers an 'edge case' or 'unhappy path'
 
 -----
 
