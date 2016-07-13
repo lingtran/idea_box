@@ -20,7 +20,7 @@ Single-page app with full CRUD functionality for capturing ideas. Focus was to p
 
 This project's learning goals were focused on delving deeper into understanding the difference between "server" and "client" entities. It focused on creating a Rails application to manage data related to ideas, serve initial UI templates, and to manage client-side interactions and communication asynchronously with the server. Obtained more experience doing DOM manipulations and AJAX event handling without using any client-side frameworks. All AJAX functionality was triggered by jQuery.
 
-* [Project Spec](https://github.com/turingschool/curriculum/blob/master/source/projects/revenge_of_idea_box.markdown)
+* [Project Spec](https://github.com/lingtran/idea_box/blob/master/project-spec.md)
 * [Project Evaluation](https://github.com/lingtran/idea_box/blob/master/idea-box-eval.md)
   * Exceeded total assigned points with addition of self-directed UX feature enhancement beyond project spec
 
