@@ -55,7 +55,7 @@ Test Suite: RSpec/Factory Girl/Database Cleaner/Selenium WebDriver/Capybara
 
 ## Internal API Reference
 
-Endpoint of internal API created to interact with the Google Charts API:
+Endpoints of internal API:
 
 > `GET '/api/v1/ideas.json'` - Render all ideas
 
